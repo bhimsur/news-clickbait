@@ -15,6 +15,6 @@ Step for testing
 - `python -m pytest test.py`
 
 Example from testing
-![original-repo](./image/test.png)
+![original-repo](./images/test.png)
 
 Original dataset [Kaggle](https://www.kaggle.com/bantalmetal/judul-artikel-online-dengan-label-clickbait)
