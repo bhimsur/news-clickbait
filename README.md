@@ -7,12 +7,17 @@ This app can classify a news headlines into clickbait and not clickbait label, t
 Step to install
 
 - clone the repo and navigate to inside the repo
-- `pip install -r requirements.txt`
-- `python start.py`
+- and run via command prompt or terminal
+```python
+pip install -r requirements.txt
+python start.py
+```
 
 Step for testing
-- navigate to the repo root directory
-- `python -m pytest test.py`
+- navigate to the repo root directory and rund via command or terminal
+```python
+python -m pytest test.py -sv --disable-pytest-warnings
+```
 
 Example from testing
 ![original-repo](./images/test.png)
