@@ -2,6 +2,7 @@ from core.main import app
 from fastapi.testclient import TestClient
 
 client = TestClient(app)
+
 def test_get_root():
   response = client.get('/')
   assert response.status_code == 200
@@ -9,5 +10,5 @@ def test_get_root():
 
 def test_post_predict():
   response = client.post('/api/v1/predict/', json={'text':'bukan berita biasa'})
-  assert response.status_code == 200
-  assert response.json() == {'status':200,'message':'not clickbait'}
+  assert response.status_code == 201
+  assert response.json() == {'status':201,'message':'not clickbait'}

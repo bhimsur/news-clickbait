@@ -1,5 +1,5 @@
 from core.utils import make_prediction
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from pydantic import BaseModel
 
 #load
@@ -28,16 +28,16 @@ app = FastAPI()
 class Input(BaseModel):
   text: str
 
-@app.get('/')
-async def get_root():
+@app.get('/', status_code=status.HTTP_200_OK)
+def get_root():
   return {'status':200, 'message':'FastAPI bhimsur@2021'}
 
-@app.post('/api/v1/predict/')
-async def post_predict(input: Input):
+@app.post('/api/v1/predict/', status_code=status.HTTP_201_CREATED)
+def post_predict(input: Input):
   classes = make_prediction(model, tfidf, input.text)
   if classes == 1:
-    return {'status':200, 'message':'clickbait'}
+    return {'status':201, 'message':'clickbait'}
   elif classes == 0:
-    return {'status':200, 'message':'not clickbait'}
+    return {'status':201, 'message':'not clickbait'}
   else:
     return {'status':400, 'message':'bad request'}

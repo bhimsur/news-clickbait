@@ -1,5 +1,3 @@
-import numpy as np
-
 def get_tfidf(tfidf, text):
   return tfidf.transform([text])
 
