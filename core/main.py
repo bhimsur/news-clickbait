@@ -1,4 +1,4 @@
-from core.utils import make_prediction
+from core.utils import make_prediction, text_preprocessor
 from fastapi import FastAPI, status
 from pydantic import BaseModel
 
@@ -30,14 +30,20 @@ class Input(BaseModel):
 
 @app.get('/', status_code=status.HTTP_200_OK)
 def get_root():
-  return {'status':200, 'message':'FastAPI bhimsur@2021'}
+  return {'status':200, 'data':'FastAPI bhimsur@2021', 'message':'success'}
 
 @app.post('/api/v1/predict/', status_code=status.HTTP_201_CREATED)
 def post_predict(input: Input):
-  classes = make_prediction(model, tfidf, input.text)
+  text = text_preprocessor(input.text)
+  classes = make_prediction(model, tfidf, text)
   if classes == 1:
-    return {'status':201, 'message':'clickbait'}
+    return {'status':201, 'data':'clickbait', 'message':'success'}
   elif classes == 0:
-    return {'status':201, 'message':'not clickbait'}
+    return {'status':201, 'data':'not clickbait', 'message':'success'}
   else:
-    return {'status':400, 'message':'bad request'}
+    return {'status':400, 'data':'bad request', 'message':'success'}
+
+@app.post('/api/v1/preprocess', status_code=status.HTTP_201_CREATED)
+def post_preprocess(input: Input):
+  text = text_preprocessor(input.text)
+  return {'status':201, 'data':text,'message':'success'}
